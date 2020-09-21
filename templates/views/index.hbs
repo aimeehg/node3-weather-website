@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Weather</title>
+        <title>Current Weather</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="icon" href="img/weather.png">
         <link rel="stylesheet" href="/css/styles.css">
     </head>
@@ -13,9 +14,11 @@
                 <input placeholder="Location">
                 <button>Search</button>
             </form>
-
-            <p id="message-1"></p>
-            <p id="message-2"></p>
+            <div class="data">
+                <p id="loading-msg"></p>
+                <p id="message-1"></p>
+                <p id="message-2"></p>
+            </div>
         </div>
         
         {{>footer}}

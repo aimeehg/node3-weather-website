@@ -22,14 +22,14 @@ app.use(express.static(publicDirectoryPath))
 
 app.get('', (req, res) =>{
     res.render('index',{
-        title: 'Weather App',
+        title: 'Current Weather',
         name: 'Aimee Hernandez'
     })
 })
 
 app.get('/about', (req,res) =>{
     res.render('about',{
-        title: 'About me',
+        title: 'About',
         name: 'Aimee Hernandez'
     })
 })
@@ -37,7 +37,6 @@ app.get('/about', (req,res) =>{
 app.get('/help', (req, res) =>{
     res.render('help',{
         title: 'Help',
-        message: 'Help page',
         name: 'Aimee Hernandez'
     })
 })
@@ -45,7 +44,7 @@ app.get('/help', (req, res) =>{
 app.get('/weather', (req, res) => {
     if(!req.query.address){
         return res.send({
-            error: 'you must provide an address'
+            error: 'You must provide a location'
         })
     }
 
@@ -55,7 +54,7 @@ app.get('/weather', (req, res) => {
           return  res.send({ error })
         } 
     
-        forecast(latitude, longitude, (error, forecastData) => {
+        forecast(latitude, longitude, (error, forecastData, image) => {
             //error from forecast
             if (error){
                 return res.send({ error })
@@ -64,6 +63,7 @@ app.get('/weather', (req, res) => {
             res.send({
                 forecast: forecastData,
                 location,
+                image,
                 address: req.query.address
             })
 
@@ -72,17 +72,12 @@ app.get('/weather', (req, res) => {
 
     })
 
- /*    res.send({
-        forecast: 'It is cloudy',
-        location: 'miahuatlan de porfirio diaz',
-        address: req.query.address
-    }) */
 })
 
 app.get('/products', (req, res) =>{
     if(!req.query.search){
        return res.send({
-            error: 'you must provide a search term'
+            error: 'You must provide a search term'
         })
     }
     console.log(req.query.search)
